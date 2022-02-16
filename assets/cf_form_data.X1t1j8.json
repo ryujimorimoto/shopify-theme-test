@@ -46,17 +46,17 @@
     "created_at": "2022-02-16T07:10:40Z",
     "updated_at": "2022-02-16T07:30:02Z",
     "revision_ids": [
-      "qYTzKZB",
       "evT9RNz",
+      "qYTzKZB",
       "xMTxGqk"
     ]
   },
   "revision": {
     "id": "qYTzKZB",
     "created_at": "2022-02-16T07:30:03Z",
-    "updated_at": "2022-02-16T07:30:03Z",
+    "updated_at": "2022-02-16T07:30:04Z",
     "embed_version": "4.9.0",
-    "published_at": null,
+    "published_at": "2022-02-16T07:30:04Z",
     "fields": [
       {
         "id": 238065,
@@ -174,12 +174,12 @@
         },
         "validations": [
           {
-            "operator": "not_blank",
-            "comparand": "",
-            "errorMessage": "Must not be blank",
             "metadata": {
               "hiddenInApp": true
-            }
+            },
+            "operator": "not_blank",
+            "comparand": "",
+            "errorMessage": "Must not be blank"
           }
         ],
         "sensitive": null,
@@ -209,12 +209,12 @@
         },
         "validations": [
           {
-            "operator": "not_blank",
-            "comparand": "",
-            "errorMessage": "Must not be blank",
             "metadata": {
               "hiddenInApp": true
-            }
+            },
+            "operator": "not_blank",
+            "comparand": "",
+            "errorMessage": "Must not be blank"
           }
         ],
         "sensitive": null,
@@ -281,13 +281,13 @@
         },
         "validations": [
           {
-            "operator": "is_valid",
-            "comparand": null,
-            "errorMessage": "Please specify a valid date",
             "metadata": {
               "mandatory": true,
               "staticOperator": true
-            }
+            },
+            "operator": "is_valid",
+            "comparand": null,
+            "errorMessage": "Please specify a valid date"
           }
         ],
         "sensitive": null,
@@ -322,12 +322,12 @@
             "errorMessage": "Please provide a valid email address"
           },
           {
-            "operator": "not_blank",
-            "comparand": "",
-            "errorMessage": "Must not be blank",
             "metadata": {
               "hiddenInApp": true
-            }
+            },
+            "operator": "not_blank",
+            "comparand": "",
+            "errorMessage": "Must not be blank"
           }
         ],
         "sensitive": null,
@@ -447,24 +447,24 @@
         },
         "validations": [
           {
-            "operator": "not_blank",
-            "comparand": "",
-            "errorMessage": "Must not be blank",
             "metadata": {
               "hiddenInApp": true
-            }
+            },
+            "operator": "not_blank",
+            "comparand": "",
+            "errorMessage": "Must not be blank"
           },
           {
-            "operator": "longer_than",
-            "comparand": 5,
-            "errorMessage": "Password is too short",
             "metadata": {
               "mandatory": true,
               "staticOperator": true,
               "comparandFieldProps": {
                 "min": 5
               }
-            }
+            },
+            "operator": "longer_than",
+            "comparand": 5,
+            "errorMessage": "Password is too short"
           }
         ],
         "sensitive": true,
@@ -572,10 +572,10 @@
       {
         "id": 108338,
         "title": "Submission success",
-        "description": "",
         "metadata": {
           "isSuccessStep": true
-        }
+        },
+        "description": ""
       }
     ],
     "rules": [
