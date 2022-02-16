@@ -1,5 +1,11 @@
 {
   "sections": {
+    "164499582103ddbd5a": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "{{ customer.first_name }}\n<script>\nvar firstName = CF.customer.get(\"first_name\");\n\n<\/script>"
+      }
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -176,6 +182,7 @@
     }
   },
   "order": [
+    "164499582103ddbd5a",
     "image_banner",
     "rich_text",
     "featured_products",
