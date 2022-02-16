@@ -3,7 +3,7 @@
     "id": "X1t1j8",
     "name": "Registration",
     "handle": "registration-4896",
-    "theme_id": null,
+    "theme_id": "128395739289",
     "settings": {
       "locales": {
         "back": "Back",
@@ -33,7 +33,7 @@
       "displayCancelButton": true,
       "redirectAfterSubmit": false,
       "goBackAfterSubmission": false,
-      "accountApprovalRequired": true,
+      "accountApprovalRequired": false,
       "cancelButtonRedirectUrl": "\/account\/login",
       "emailVerificationRequired": false,
       "postSubmissionRedirectUrl": "\/account",
@@ -41,19 +41,20 @@
       "goBackAfterCancelButtonClick": false
     },
     "install_locations": [
-
+      "register"
     ],
     "created_at": "2022-02-16T07:10:40Z",
-    "updated_at": "2022-02-16T07:10:40Z",
+    "updated_at": "2022-02-16T07:30:02Z",
     "revision_ids": [
-      "xMTxGqk",
-      "evT9RNz"
+      "qYTzKZB",
+      "evT9RNz",
+      "xMTxGqk"
     ]
   },
   "revision": {
-    "id": "xMTxGqk",
-    "created_at": "2022-02-16T07:11:50Z",
-    "updated_at": "2022-02-16T07:11:50Z",
+    "id": "qYTzKZB",
+    "created_at": "2022-02-16T07:30:03Z",
+    "updated_at": "2022-02-16T07:30:03Z",
     "embed_version": "4.9.0",
     "published_at": null,
     "fields": [
@@ -173,12 +174,12 @@
         },
         "validations": [
           {
-            "metadata": {
-              "hiddenInApp": true
-            },
             "operator": "not_blank",
             "comparand": "",
-            "errorMessage": "Must not be blank"
+            "errorMessage": "Must not be blank",
+            "metadata": {
+              "hiddenInApp": true
+            }
           }
         ],
         "sensitive": null,
@@ -208,12 +209,12 @@
         },
         "validations": [
           {
-            "metadata": {
-              "hiddenInApp": true
-            },
             "operator": "not_blank",
             "comparand": "",
-            "errorMessage": "Must not be blank"
+            "errorMessage": "Must not be blank",
+            "metadata": {
+              "hiddenInApp": true
+            }
           }
         ],
         "sensitive": null,
@@ -280,13 +281,13 @@
         },
         "validations": [
           {
+            "operator": "is_valid",
+            "comparand": null,
+            "errorMessage": "Please specify a valid date",
             "metadata": {
               "mandatory": true,
               "staticOperator": true
-            },
-            "operator": "is_valid",
-            "comparand": null,
-            "errorMessage": "Please specify a valid date"
+            }
           }
         ],
         "sensitive": null,
@@ -321,12 +322,12 @@
             "errorMessage": "Please provide a valid email address"
           },
           {
-            "metadata": {
-              "hiddenInApp": true
-            },
             "operator": "not_blank",
             "comparand": "",
-            "errorMessage": "Must not be blank"
+            "errorMessage": "Must not be blank",
+            "metadata": {
+              "hiddenInApp": true
+            }
           }
         ],
         "sensitive": null,
@@ -446,24 +447,24 @@
         },
         "validations": [
           {
-            "metadata": {
-              "hiddenInApp": true
-            },
             "operator": "not_blank",
             "comparand": "",
-            "errorMessage": "Must not be blank"
+            "errorMessage": "Must not be blank",
+            "metadata": {
+              "hiddenInApp": true
+            }
           },
           {
+            "operator": "longer_than",
+            "comparand": 5,
+            "errorMessage": "Password is too short",
             "metadata": {
               "mandatory": true,
               "staticOperator": true,
               "comparandFieldProps": {
                 "min": 5
               }
-            },
-            "operator": "longer_than",
-            "comparand": 5,
-            "errorMessage": "Password is too short"
+            }
           }
         ],
         "sensitive": true,
@@ -571,10 +572,10 @@
       {
         "id": 108338,
         "title": "Submission success",
+        "description": "",
         "metadata": {
           "isSuccessStep": true
-        },
-        "description": ""
+        }
       }
     ],
     "rules": [
