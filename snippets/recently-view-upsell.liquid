@@ -1,0 +1,109 @@
+<div id="recently-view-upsell" class="recently-viewed-product__page-margin recently-viewed-product__page-width">
+  <div class="grid grid--uniform grid--view-items leg-room recently-viewed-product__grid" id="recently-viewed-products"> </div>
+</div>
+<script>
+/**
+ * 全てのcookieの中から、shopify_recently_viewed_handleを探し、
+ * その中に、商品IDが含まれているかどうかを調べる。
+ * 含まれていなければ、
+ * ・何もしない
+ *
+ * 含まれていれば、
+ * ・shopify_recently_viewed_handleの中に、商品IDが含まれているかどうかを調べる
+ * ・商品IDが含まれていれば、Shopify Ajaxで商品情報を取得する
+ * ・取得した全ての商品情報を、HTMLに追加する
+ */
+window.addEventListener("load", async () => {
+  const productsElement = document.querySelector("#recently-viewed-products");
+  const allCookies = document.cookie.split(';');
+  const shopify_recently_viewed_handle = allCookies.find(cookie => cookie.includes('shopify_recently_viewed_handle'));
+  if (shopify_recently_viewed_handle) {
+    const recentlyViewedProducts = shopify_recently_viewed_handle.split('=')[1]?.split(',');
+    const productsToShowData = await Promise.all(
+      recentlyViewedProducts.map( rvp => {
+        if(rvp != "")
+        {
+          return fetch(`/products/${decodeURI(rvp)}.json`)
+            .then(response => response.json())
+            .then(data => data.product)
+        }else{
+          null
+        }
+      })
+    );
+    const productsToShow = productsToShowData.filter(product => !!product);
+    productsToShow.forEach(product => {
+      const productElement = document.createElement("div");
+      productElement.classList.add("grid__item");
+      productElement.classList.add("product-template__container");
+      productElement.classList.add("recently-viewed-product__grid-style");
+      const productImage = !product.image ? `{{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}` : `<img src="${product.image.src}" alt="${product.title}" class="recoomendation-image">`
+      productElement.innerHTML = `
+        <div class="product-template__image">
+          <a href="//${window.location.host}/products/${product.handle}">
+            ${productImage}
+          </a>
+        </div>
+        <div class="product-template__info">
+          <div class="product-template__title">
+            <a href="//${window.location.host}/products/${product.handle}">${product.title}</a>
+          </div>
+          <div class="product-template__price">
+            <span class="money">¥${Number(product.variants[0].price).toLocaleString()}</span>
+          </div>
+        </div>
+      `;
+      productsElement.appendChild(productElement);
+    });
+  }
+});
+
+</script>
+{%- style -%}
+  .recently-viewed-product__grid-style {
+    flex-basis: 16.6%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    max-width: 16.6%;
+  }
+  .recently-viewed-product__grid-style a{
+    color: inherit;
+    text-decoration: none;
+  }
+  @media screen and (max-width: 1020px) {
+    .recently-viewed-product__grid {
+      justify-content: space-between;
+    }
+    .recently-viewed-product__grid-style {
+      flex-basis: calc(50% - var(--grid-mobile-vertical-spacing));
+      max-width: calc(50% - var(--grid-mobile-vertical-spacing));
+      margin: 0 0 3rem;
+    }
+  }
+
+.recently-viewed-product__page-width {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.product-template__image {
+  width: 100%;
+  height: 200px;
+}
+.product-template__image a img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+@media screen and (min-width: 750px) {
+  .recently-viewed-product__page-width {
+    padding: 0 5rem;
+  }
+}
+
+.recently-viewed-product__page-margin {
+  margin: 7rem auto;
+}
+{%- endstyle -%}

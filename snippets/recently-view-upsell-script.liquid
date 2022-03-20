@@ -1,0 +1,53 @@
+<script>
+
+async function shopifyRecentlyViewed() {
+  const allCookies = document.cookie.split(';');
+  const shopify_recently_viewed_handle = allCookies.find(cookie => cookie.includes('shopify_recently_viewed_handle'));
+  const productHandle = '{{ product.handle | handlize }}';
+  const expires = new Date(new Date().getTime() + (1000 * 60 * 60 * 24 * 7));
+  if(typeof shopify_recently_viewed_handle == 'undefined'  ) {
+    document.cookie = `shopify_recently_viewed_handle=${(productHandle)};path=/;expires=${expires.toUTCString()}`;
+  }else{
+    var recentlyViewedHandle = shopify_recently_viewed_handle.split('=')[1].split(',');
+    if(!recentlyViewedHandle.includes(productHandle)){
+      recentlyViewedHandle.unshift(productHandle);
+      recentlyViewedHandle = recentlyViewedHandle.slice(0, 6);
+      document.cookie = `shopify_recently_viewed_handle=${recentlyViewedHandle.join(',')};path=/;expires=${expires.toUTCString()}`;
+    }
+  }
+
+  const shopify_recently_viewed_product_id =  allCookies.find(cookie => cookie.includes('shopify_recently_viewed_product_id'));
+  const productId = '{{ product.id }}';
+  if(typeof shopify_recently_viewed_product_id == 'undefined'  ) {
+    document.cookie = `shopify_recently_viewed_product_id=${(productId)};path=/;expires=${expires.toUTCString()}`;
+  }else{
+    let recentlyViewedProductId = shopify_recently_viewed_product_id.split('=')[1].split(',');
+    if(!recentlyViewedProductId.includes(productId)){
+      recentlyViewedProductId.unshift(productId);
+      recentlyViewedProductId = recentlyViewedProductId.slice(0, 6);
+      document.cookie = `shopify_recently_viewed_product_id=${recentlyViewedProductId.join(',')};path=/;expires=${expires.toUTCString()}`;
+      await fetch('https://recently-view-products.app/api/recently-viewed', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          myshopifyDomain: '{{ shop.permanent_domain }}',
+          recentlyViewedHandle: recentlyViewedHandle || [],
+          recentlyViewedProductId: recentlyViewedProductId || []
+        })
+      })
+      .then(data => {
+        console.log(data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    }
+  }
+}
+{% if template contains "product" %}
+  window.addEventListener('load', async () => await shopifyRecentlyViewed());
+{% endif %}
+</script>
