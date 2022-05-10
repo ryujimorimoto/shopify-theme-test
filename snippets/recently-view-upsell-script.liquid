@@ -36,7 +36,7 @@ async function shopifyRecentlyViewed() {
           myshopifyDomain: '{{ shop.permanent_domain }}',
           recentlyViewedHandle: recentlyViewedHandle || [],
           recentlyViewedProductId: recentlyViewedProductId || [].
-          customerId: {{ customer.id }} || ""
+          customerId: {%- if customer -%}'{{ customer.id }}'{%- else -%}""{%- endif -%}
         })
       })
       .then(data => {
