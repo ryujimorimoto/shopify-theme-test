@@ -35,7 +35,7 @@ async function shopifyRecentlyViewed() {
         body: JSON.stringify({
           myshopifyDomain: '{{ shop.permanent_domain }}',
           recentlyViewedHandle: recentlyViewedHandle || [],
-          recentlyViewedProductId: recentlyViewedProductId || [].
+          recentlyViewedProductId: recentlyViewedProductId || [],
           customerId: {%- if customer -%}'{{ customer.id }}'{%- else -%}""{%- endif -%}
         })
       })
